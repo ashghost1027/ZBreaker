@@ -17,8 +17,6 @@ for i in range(len(maze)):
             starting_and_ending_co_ords.append([i,j])
 
 print(starting_and_ending_co_ords)
-            
-
 def maze_printer(maze):
     for i in maze:
         for j in i:
@@ -71,56 +69,80 @@ def maze_left(row, col):
 
 co_ords = []
 # print()
+all_co = []
+
 def travel(start):
+    # all_co = []
+
     while start != end :
         if start == end:
             break
         if start == end:
             break
         paths_available = 0
-        print("start ", start)
+        # print("start ", start)
         # print(maze_down(start[0], start[1]))
         if maze_down(start[0], start[1]) and start[0]+1 < len(maze) :
             paths_available+=1
             # print(start[0])
             start[0]+=1
+            all_co.append(start)
+
 
         if maze_right(start[0], start[1]) and start[1]+1 < len(maze) :
             paths_available+=1
             # print(start)
-
             start[1]+=1
+            all_co.append(start)
+
 
         if maze_up(start[0],start[1]) and start[0] - 1 >= 0:
             paths_available+=1
             start[0]-=1
             # print(start)
+            all_co.append(start)
 
 
         if maze_left(start[0],start[1]) and start[1] - 1 >= 0:
             paths_available+=1
             start[1]-=1
             # print(start)
+            all_co.append(start)
         
         # print(start)
         
         if maze_down(start[0], start[1]) == False and maze_right(start[0], start[1]) == False and maze_up(start[0],start[1]) == False and maze_left(start[0],start[1]) == False:
+            if end in all_co:
+                break
+            maze[start[0]][start[1]] += 1
+            
             for i in range(len(maze)):
                 for j in range(len(maze)):
                     if maze[i][j] == 2:
                         co_ords.append([i,j])  
-                        print(i,j)
-                        print(start)
+                        maze[i][j] += 1
+            # all_co = []
             break
 
 travel(start)
 print(co_ords)
 for i in co_ords :
     # co_ords.remove(i)
-    maze_printer(maze)
+    # maze_printer(maze)
+    # print(all_co)
+    if end in all_co:
+        break
     # print(co_ords)
     travel(i)
-   
+
+co_ordinates = []
+for i in range(len(maze)):
+    for j in range(len(maze)):
+        if maze[i][j] == "S" or maze[i][j] == "G":
+            co_ordinates.append([i,j])
+        elif maze[i][j]<=3  and maze[i][j] >= 2:
+            co_ordinates.append([i,j])
+print(co_ordinates)   
         
 
 
