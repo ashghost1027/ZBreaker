@@ -179,10 +179,3 @@ print(co_ordinates)
 
 # print(co_ords)
 maze_printer(maze)
-            
-
-    
-
-
-
-
